@@ -142,6 +142,12 @@ public class Test2 {
                                               wrongShow();
                                               //答错
                                               grades-=2;
+                                              if(grades<0) {
+                                                  //防止用户操作过快导致计时器无法反应从而产生负数分数
+                                                  f.setVisible(false);
+                                                  label.setText("LOSS!");
+                                                  dialog.setVisible(true);
+                                              }
                                               jLabelGrades.setText("Grades: "+grades);
                                           }
                                       }
@@ -177,7 +183,6 @@ public class Test2 {
                 jLabelGrades.setText("Grades: "+grades);
             }
             else{
-                grades=0;
                 //分数低于0
                 timer.stop();
                 test3.outputVocabulary();

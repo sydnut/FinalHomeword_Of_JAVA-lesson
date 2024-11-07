@@ -114,6 +114,12 @@ public class Test1 {
                     //答错
                     wrongShow();
                     grades -= 2;
+                    if (grades < 0) {
+                        //防止用户操作过快导致计时器无法反应从而产生负数分数
+                        f.setVisible(false);
+                        label.setText("LOSS!");
+                        dialog.setVisible(true);
+                    }
                     jLabelGrades.setText("Grades: " + grades);
                 }
             }
@@ -122,7 +128,7 @@ public class Test1 {
         blank.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
-                blank.setText(rightAnswer.charAt(0)+""+rightAnswer.charAt(rightAnswer.length()-1));
+                blank.setText(rightAnswer.charAt(0) + "" + rightAnswer.charAt(rightAnswer.length() - 1));
             }
         });
 
@@ -139,7 +145,6 @@ public class Test1 {
                     grades -= 1;
                     jLabelGrades.setText("Grades: " + grades);
                 } else {
-                    grades = 0;
                     //分数低于0
                     timer.stop();
                     vocabulary.outputVocabulary();
@@ -149,7 +154,8 @@ public class Test1 {
         });
         JPanel panel = new JPanel();
         GridLayout gridLayout2 = new GridLayout();
-        gridLayout2.setRows(2);panel.setLayout(gridLayout2);
+        gridLayout2.setRows(2);
+        panel.setLayout(gridLayout2);
         jLabel = new JLabel("left " + count + " s");
         jLabel.setSize(500, 125);
         jLabel.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -165,11 +171,11 @@ public class Test1 {
                 f.dispose();
             }
         });
-        panel.add(jLabel);panel.add(jLabelGrades);
+        panel.add(jLabel);
+        panel.add(jLabelGrades);
         f.add(panel);
         timer.start();
         f.setVisible(true);
-
 
 
     }
