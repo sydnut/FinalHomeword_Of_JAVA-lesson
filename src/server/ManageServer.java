@@ -1,5 +1,6 @@
 package server;
 
+import java.util.stream.*;
 import java.util.HashMap;
 
 /**
@@ -17,9 +18,9 @@ public class ManageServer {
     public synchronized static  void add(String id,Thread thread) {
         ManageMap.put(id, thread);
     }
-    public synchronized static String getOnlineList(){
+    public synchronized static String getOnlineList(String id){
         StringBuilder s=new StringBuilder();
-        ManageMap.keySet().forEach(a->{
+        ManageMap.keySet().stream().filter(a->!a.equals(id)).collect(Collectors.toSet()).forEach(a->{
             s.append(a);s.append(' ');
         });
         return s.toString();

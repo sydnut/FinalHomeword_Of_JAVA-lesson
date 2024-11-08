@@ -36,7 +36,7 @@ public class ServerToClientThread extends Thread{
                 if(msg.getType().equals(MessageType.MSG_ASK_ONLINE_LIST)){
                     System.out.println(uid+" is asking the online list!");
                     Message message = new Message();
-                    message.setContent(ManageServer.getOnlineList());
+                    message.setContent(ManageServer.getOnlineList(uid));
                     try {
                         ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
                         oos.writeObject(message);
