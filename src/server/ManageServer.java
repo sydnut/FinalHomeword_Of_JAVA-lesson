@@ -1,5 +1,6 @@
 package server;
 
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.stream.*;
 import java.util.HashMap;
 
@@ -10,19 +11,29 @@ import java.util.HashMap;
  */
 public class ManageServer {
     private static HashMap<String ,Thread>ManageMap=null;
+    private static ReentrantReadWriteLock lock=null;
     public ManageServer(){
         if (ManageMap == null) {
             ManageMap=new HashMap<>();
         }
+        if(lock==null){
+            lock=new ReentrantReadWriteLock();
+        }
     }
-    public synchronized static  void add(String id,Thread thread) {
+    //加写锁
+    public  static  void add(String id,Thread thread) {
+        lock.writeLock().lock();
         ManageMap.put(id, thread);
+        lock.writeLock().unlock();
     }
-    public synchronized static String getOnlineList(String id){
+    //加读锁
+    public static String getOnlineList(String id){
         StringBuilder s=new StringBuilder();
+        lock.readLock().lock();
         ManageMap.keySet().stream().filter(a->!a.equals(id)).collect(Collectors.toSet()).forEach(a->{
             s.append(a);s.append(' ');
         });
+        lock.readLock().unlock();
         return s.toString();
     }
 
