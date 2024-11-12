@@ -15,7 +15,7 @@ import java.util.HashMap;
  * @time 2024/11/2
  */
 public class Server {
-    //读取单词表
+    //单词表
     private static String filename="C:\\Users\\31374\\IdeaProjects\\FinalHomework\\src\\list.txt";
     private static HashMap<String ,String>EnCnMap=new HashMap<>();
     //管理登录了的用户线程集合

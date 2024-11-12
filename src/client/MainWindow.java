@@ -10,8 +10,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Scanner;
 
 /**
  * @author sydnut
@@ -19,8 +17,6 @@ import java.util.Scanner;
  * @time 2024/11/1
  */
 public class MainWindow {
-    private Scanner scanner;
-    private PrintWriter printWriter;
     private ClientService clientService;
     //单例，避免生成太多对话框浪费内存！
     private Dialog dialog1 = null;
@@ -40,7 +36,7 @@ public class MainWindow {
         jPanel.add(title);
         //设置用户名和密码输入框
         JTextField uid = new JTextField();
-        uid.setText("input your uid");
+        uid.setText("input your uid: ");
         jPanel.add(uid);
         JPasswordField pwd = new JPasswordField();
         pwd.setText("password");
@@ -64,9 +60,10 @@ public class MainWindow {
         jPanel.add(panel);
         button2.addActionListener(e -> {
             try {
-                if (clientService.isLogin(uid.getText(), pwd.getText(),MessageType.MSG_LOGIN_SUCCESS).equals(MessageType.MSG_LOGIN_SUCCESS)) {
+                String userId=uid.getText().substring(16);
+                if (clientService.isLogin(userId, pwd.getText(),MessageType.MSG_LOGIN_SUCCESS).equals(MessageType.MSG_LOGIN_SUCCESS)) {
                     jPanel.removeAll();
-                    vocabulary = new Test3(uid.getText());
+                    vocabulary = new Test3(userId);
                     JButton test1 = new JButton("看中文填英语");
                     JButton test2 = new JButton("看英语选中文");
                     JButton test3 = new JButton("查看单词");
@@ -116,7 +113,8 @@ public class MainWindow {
         });
         button1.addActionListener(e -> {
             try {
-                if (clientService.isLogin(uid.getText(), pwd.getText(),MessageType.MSG_SIGN_UP).equals(MessageType.MSG_SIGN_UP)) {
+                String userId=uid.getText().substring(16);
+                if (clientService.isLogin(userId, pwd.getText(),MessageType.MSG_SIGN_UP).equals(MessageType.MSG_SIGN_UP)) {
                     if (dialog2 == null) {
                         dialog2 = new Dialog(frame);
                         dialog2.setBounds(600, 300, 300, 100);
@@ -132,7 +130,7 @@ public class MainWindow {
                         }
                     });
                     jPanel.removeAll();
-                    vocabulary = new Test3(uid.getText());
+                    vocabulary = new Test3(userId);
                     JButton test1 = new JButton("看中文填英语");
                     JButton test2 = new JButton("看英语选中文");
                     JButton test3 = new JButton("查看单词");

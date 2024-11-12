@@ -11,7 +11,7 @@ import java.util.HashMap;
  * @time 2024/11/4
  */
 public class ServerService {
-    private static HashMap<String ,String >map=null;
+    private static HashMap<String ,String >map=null;//单词表
     public ServerService(HashMap<String ,String >map){
         this.map=map;
     }
