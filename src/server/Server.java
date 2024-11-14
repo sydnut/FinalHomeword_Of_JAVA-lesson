@@ -20,6 +20,7 @@ public class Server {
     private static HashMap<String ,String>EnCnMap=new HashMap<>();
     //管理登录了的用户线程集合
     private ManageServer manageServer;
+
     //服务器对应服务类
     private ServerService serverService;
     //已注册的用户集合

@@ -72,4 +72,13 @@ public class ClientService {
         }
         return null;
     }
+    public void setClosedAction(){
+        try{ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
+                Message msg = new Message();
+                msg.setType(MessageType.MSG_QUIT);
+                oos.writeObject(msg);
+    }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 }

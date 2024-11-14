@@ -60,6 +60,9 @@ public class ServerToClientThread extends Thread{
                     message.setType(MessageType.MSG_TEST_1);
                     message.setContent(ServerService.getRandomTest1());
                     oos.writeObject(message);
+                }else if(msg.getType().equals(MessageType.MSG_QUIT)){
+                    System.out.println(uid+" has quit!");
+                    ManageServer.removeThread(uid);
                 }
 
             }catch (Exception e){

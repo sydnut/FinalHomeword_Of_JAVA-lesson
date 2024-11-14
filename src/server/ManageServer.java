@@ -36,5 +36,10 @@ public class ManageServer {
         lock.readLock().unlock();
         return s.toString();
     }
+    public static void removeThread(String id){
+        lock.writeLock().lock();
+        ManageMap.remove(id);
+        lock.writeLock().unlock();
+    }
 
 }

@@ -90,6 +90,7 @@ public class MainWindow {
                     jPanel.add(checkFriends);
                     jPanel.revalidate();
                     jPanel.repaint();
+                    setClosingAciton(frame);
                 } else {
                     if (dialog1 == null) {
                         dialog1 = new Dialog(frame, "Error!");
@@ -101,7 +102,7 @@ public class MainWindow {
                         @Override
                         public void windowClosing(WindowEvent e) {
                             dialog1.setVisible(false);
-                            uid.setText("");
+                            uid.setText("input your uid: ");
                             pwd.setText("");
                         }
                     });
@@ -121,14 +122,6 @@ public class MainWindow {
                         dialog2.add(new JLabel("Welcome our new User!"));
                     }
                     dialog2.setVisible(true);
-                    dialog2.addWindowListener(new WindowAdapter() {
-                        @Override
-                        public void windowClosing(WindowEvent e) {
-                            dialog2.setVisible(false);
-                            uid.setText("");
-                            pwd.setText("");
-                        }
-                    });
                     jPanel.removeAll();
                     vocabulary = new Test3(userId);
                     JButton test1 = new JButton("看中文填英语");
@@ -158,6 +151,7 @@ public class MainWindow {
                     jPanel.add(checkFriends);
                     jPanel.revalidate();
                     jPanel.repaint();
+                    setClosingAciton(frame);
                 } else {
                     if (dialog2 == null) {
                         dialog2 = new Dialog(frame);
@@ -169,7 +163,7 @@ public class MainWindow {
                         @Override
                         public void windowClosing(WindowEvent e) {
                             dialog2.setVisible(false);
-                            uid.setText("");
+                            uid.setText("input your uid: ");
                             pwd.setText("");
                         }
                     });
@@ -188,6 +182,13 @@ public class MainWindow {
     public static void main(String[] args) {
         new MainWindow();
     }
-
+    private void setClosingAciton(JFrame frame){
+        frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                clientService.setClosedAction();
+            }
+        });
+    }
 
 }
