@@ -1,13 +1,10 @@
 package function;
 
-import server.ServerToClientThread;
-
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
-import java.util.Scanner;
 
 /**
  * @author sydnut
@@ -19,43 +16,11 @@ public class Test3 {
     private String unknown_Vocabulury = "C:\\Users\\31374\\IdeaProjects\\FinalHomework\\src\\vocabulary\\";
     private HashMap<String, String> BufferedMap_1 = new HashMap<>();
     private HashMap<String, String> BufferedMap_2 = new HashMap<>();
-    private String userId;
-
-    /*
-    public static void main(String[] args)throws IOException {
-
-        String[] strings;
-        int i=0;
-        while (reader.ready()){
-                    String s=reader.readLine();
-        System.out.println(s+(++i));}
-    }
-    */
     //构造函数中读入单词表
     public Test3(String id) throws IOException {
-        userId = id;
         learned_Vocabulury += (id + "_learned.txt");
         unknown_Vocabulury += (id + "_unknown.txt");
     }
-
-    public static void main(String[] args) throws IOException {
-        Test3 v = new Test3("trial");
-        try (RandomAccessFile file = new RandomAccessFile(v.learned_Vocabulury, "rw")) {
-            file.write("234\r\n".getBytes(StandardCharsets.UTF_8));
-            file.write("asdddwn\r\n".getBytes(StandardCharsets.UTF_8));
-
-        }
-    }
-
-    /*
-    public static void main(String[] args) throws IOException {
-        Test3 test = new Test3("1");
-        test.addLearned("33", "eee");
-        test.addUnknown("4", "qcbh");
-        test.outputVocabulary();
-        test.checkVocabulary();
-    }
-    */
     public void addLearned(String en, String cn) {
         BufferedMap_1.put(en, cn);
     }
